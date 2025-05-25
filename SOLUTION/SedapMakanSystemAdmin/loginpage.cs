@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace SedapMakanSystemAdmin
 {
@@ -16,36 +17,61 @@ namespace SedapMakanSystemAdmin
         public loginpage()
         {
             InitializeComponent();
+
         }
+        SqlConnection connection = new SqlConnection(@"Data Source=VIXWOKE;Initial Catalog=IOOP_Database;Integrated Security=True");
 
 
-        private void loginpage_Load(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            string version = "Unknown";
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+
             try
             {
-                string versionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "version.txt");
-                if (File.Exists(versionPath))
+                String query = "SELECT * FROM [user].userLogin WHERE userUsername = '" + username + "' AND userPassword = '" + password + "'";
+                SqlDataAdapter sda = new SqlDataAdapter(query, connection);
+                DataTable dttbl = new DataTable();
+                sda.Fill(dttbl);
+                if (dttbl.Rows.Count > 0)
                 {
-                    version = File.ReadAllText(versionPath).Trim();
+                    var admForm = new adminHome();
+                    admForm.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password. Please try again.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception)
+            catch(Exception ex)
             {
-                version = "Error reading version";
+                MessageBox.Show("Developer Error: " + ex.Message + "\nPlease contact Gilang ASAP.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            lblVersionControl.Text = $"Version: {version}";
         }
 
-        private void lblVersionControl_Click(object sender, EventArgs e)
+        private void txtUsername_LostFocus(object sender, EventArgs e)
         {
-
+            if (txtUsername.Text == "")
+            {
+                lblRequiredUsername.Visible = true;
+            }
+            else
+            {
+                lblRequiredUsername.Visible = false;
+            }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void txtPassword_LostFocus(object sender, EventArgs e)
         {
-
+            if (txtPassword.Text == "")
+            {
+                lblRequiredPassword.Visible = true;
+            }
+            else
+            {
+                lblRequiredPassword.Visible = false;
+            }
         }
     }
 }

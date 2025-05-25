@@ -36,8 +36,9 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblVersionControl = new System.Windows.Forms.Label();
-            this.lblAppName = new System.Windows.Forms.Label();
+            this.lblRequiredUsername = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.lblRequiredPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtPassword
@@ -50,6 +51,8 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(231, 20);
             this.txtPassword.TabIndex = 0;
+            this.txtPassword.LostFocus += new System.EventHandler(this.txtPassword_LostFocus);
+
             // 
             // txtUsername
             // 
@@ -59,6 +62,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(231, 20);
             this.txtUsername.TabIndex = 0;
+            this.txtUsername.LostFocus += new System.EventHandler(this.txtUsername_LostFocus);
             // 
             // lblHello
             // 
@@ -119,19 +123,19 @@
             this.lblVersionControl.Size = new System.Drawing.Size(79, 18);
             this.lblVersionControl.TabIndex = 1;
             this.lblVersionControl.Text = "V0.0.1 (Alpha)";
-            this.lblVersionControl.Click += new System.EventHandler(this.lblVersionControl_Click);
             // 
-            // lblAppName
+            // lblRequiredUsername
             // 
-            this.lblAppName.AutoSize = true;
-            this.lblAppName.BackColor = System.Drawing.Color.Transparent;
-            this.lblAppName.Font = new System.Drawing.Font("Gontserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAppName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblAppName.Location = new System.Drawing.Point(597, 405);
-            this.lblAppName.Name = "lblAppName";
-            this.lblAppName.Size = new System.Drawing.Size(191, 18);
-            this.lblAppName.TabIndex = 1;
-            this.lblAppName.Text = "SedapMakan Management System";
+            this.lblRequiredUsername.AutoSize = true;
+            this.lblRequiredUsername.BackColor = System.Drawing.Color.Transparent;
+            this.lblRequiredUsername.Font = new System.Drawing.Font("Gontserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequiredUsername.ForeColor = System.Drawing.Color.Red;
+            this.lblRequiredUsername.Location = new System.Drawing.Point(295, 211);
+            this.lblRequiredUsername.Name = "lblRequiredUsername";
+            this.lblRequiredUsername.Size = new System.Drawing.Size(133, 18);
+            this.lblRequiredUsername.TabIndex = 1;
+            this.lblRequiredUsername.Text = "⚠︎ Username Required!";
+            this.lblRequiredUsername.Visible = false;
             // 
             // btnLogin
             // 
@@ -141,6 +145,20 @@
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // lblRequiredPassword
+            // 
+            this.lblRequiredPassword.AutoSize = true;
+            this.lblRequiredPassword.BackColor = System.Drawing.Color.Transparent;
+            this.lblRequiredPassword.Font = new System.Drawing.Font("Gontserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequiredPassword.ForeColor = System.Drawing.Color.Red;
+            this.lblRequiredPassword.Location = new System.Drawing.Point(295, 259);
+            this.lblRequiredPassword.Name = "lblRequiredPassword";
+            this.lblRequiredPassword.Size = new System.Drawing.Size(131, 18);
+            this.lblRequiredPassword.TabIndex = 1;
+            this.lblRequiredPassword.Text = "⚠︎ Password Required!";
+            this.lblRequiredPassword.Visible = false;
             // 
             // loginpage
             // 
@@ -151,7 +169,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblPassword);
-            this.Controls.Add(this.lblAppName);
+            this.Controls.Add(this.lblRequiredPassword);
+            this.Controls.Add(this.lblRequiredUsername);
             this.Controls.Add(this.lblVersionControl);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblInformation);
@@ -165,7 +184,6 @@
             this.Name = "loginpage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sedap Makan";
-            this.Load += new System.EventHandler(this.loginpage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,7 +198,8 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblVersionControl;
-        private System.Windows.Forms.Label lblAppName;
+        private System.Windows.Forms.Label lblRequiredUsername;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label lblRequiredPassword;
     }
 }
