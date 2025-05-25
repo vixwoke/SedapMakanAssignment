@@ -156,8 +156,5 @@
   <ItemGroup>
     <None Include="Resources\loginpage.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Version.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
