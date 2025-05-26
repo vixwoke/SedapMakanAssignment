@@ -19,7 +19,7 @@ namespace SedapMakanSystemAdmin
             InitializeComponent();
 
         }
-        SqlConnection connection = new SqlConnection(@"Data Source=VIXWOKE;Initial Catalog=IOOP_Database;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=VIXWOKE\SQLEXPRESS;Initial Catalog=ioop_assignment;Integrated Security=True");
 
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -27,27 +27,27 @@ namespace SedapMakanSystemAdmin
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
-            try
-            {
-                String query = "SELECT * FROM [user].userLogin WHERE userUsername = '" + username + "' AND userPassword = '" + password + "'";
-                SqlDataAdapter sda = new SqlDataAdapter(query, connection);
-                DataTable dttbl = new DataTable();
-                sda.Fill(dttbl);
-                if (dttbl.Rows.Count > 0)
+                try
                 {
-                    var admForm = new adminHome();
-                    admForm.Show();
-                    this.Hide();
+                    String query = "SELECT * FROM [user].userLoginInfo WHERE userUsername = '" + username + "' AND userPassword = '" + password + "'";
+                    SqlDataAdapter sda = new SqlDataAdapter(query, connection);
+                    DataTable dttbl = new DataTable();
+                    sda.Fill(dttbl);
+                    if (dttbl.Rows.Count > 0)
+                    {
+                        var admForm = new adminHome();
+                        admForm.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid username or password. Please try again.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    MessageBox.Show("Invalid username or password. Please try again.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Developer Error: " + ex.Message + "\nPlease contact Gilang ASAP.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Developer Error: " + ex.Message + "\nPlease contact Gilang ASAP.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void txtUsername_LostFocus(object sender, EventArgs e)
@@ -58,6 +58,8 @@ namespace SedapMakanSystemAdmin
             }
             else
             {
+                string usernameUpperCasing = txtUsername.Text.ToUpper();
+                txtUsername.Text = usernameUpperCasing;
                 lblRequiredUsername.Visible = false;
             }
         }
