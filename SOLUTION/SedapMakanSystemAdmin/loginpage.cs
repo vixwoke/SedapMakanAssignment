@@ -75,5 +75,20 @@ namespace SedapMakanSystemAdmin
                 lblRequiredPassword.Visible = false;
             }
         }
+
+        private void loginpage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                btnLogin.PerformClick();
+            }
+        }
     }
 }

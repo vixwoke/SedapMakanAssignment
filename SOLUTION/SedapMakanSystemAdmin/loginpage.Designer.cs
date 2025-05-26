@@ -51,8 +51,8 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(231, 20);
             this.txtPassword.TabIndex = 0;
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             this.txtPassword.LostFocus += new System.EventHandler(this.txtPassword_LostFocus);
-
             // 
             // txtUsername
             // 
@@ -184,6 +184,7 @@
             this.Name = "loginpage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sedap Makan";
+            this.Load += new System.EventHandler(this.loginpage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

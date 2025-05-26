@@ -59,7 +59,7 @@ namespace SedapMakanSystemAdmin
 
         private void adminHome_Load(object sender, EventArgs e)
         {
-
+            cbboxShowReportFor.SelectedIndex = 0;
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -85,6 +85,27 @@ namespace SedapMakanSystemAdmin
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult exitDialog =
+                MessageBox.Show("Are you sure you want to logout?",
+                "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if(exitDialog == DialogResult.OK)
+            {
+                var loginForm = new loginpage();
+                loginForm.Show();
+                this.Close();
+            }
+            else
+            {
+            }
         }
     }
 }
